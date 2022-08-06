@@ -8,7 +8,7 @@ import com.lc.hibernate.demo.entity.Instructor;
 import com.lc.hibernate.demo.entity.InstructorDetail;
 import com.lc.hibernate.demo.entity.Student;
 
-public class GetInstructorDetailDemo {
+public class DeleteInstructorDetailDemo {
 
 	public static void main(String[] args) {
 
@@ -28,7 +28,7 @@ public class GetInstructorDetailDemo {
 			session.beginTransaction();
 			
 			//get instructor details object
-			int theId = 2;
+			int theId = 3;
 			InstructorDetail tempInstructorDetail = 
 					session.get(InstructorDetail.class, theId);
 			
@@ -37,6 +37,12 @@ public class GetInstructorDetailDemo {
 			
 			//print instructor
 			System.out.println(tempInstructorDetail.getInstructor());
+			
+			//remove the associated oject reference
+			tempInstructorDetail.getInstructor().setInstructorDetail(null);
+			
+			//delete instructor detail
+			session.delete(tempInstructorDetail);
 			
 			//commit transaction
 			session.getTransaction().commit();;
